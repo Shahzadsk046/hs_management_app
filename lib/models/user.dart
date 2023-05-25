@@ -8,13 +8,14 @@ import 'package:admin/models/poll_vote.dart';
 import 'package:admin/models/property.dart';
 import 'package:admin/models/society.dart';
 import 'package:admin/models/vote.dart';
+import 'package:uuid/uuid.dart';
 
 class User {
-  int id;
+  late int id;
   String name;
   String email;
   String password;
-  UserRole role;
+  UserRole? role;
   String phone;
 
   List<Property>? properties;
@@ -35,17 +36,19 @@ class User {
     required this.password,
     required this.role,
     required this.phone,
-    required this.properties,
-    required this.elections,
-    required this.committeeMembers,
-    required this.nominees,
-    required this.votes,
-    required this.pollVotes,
-    required this.events,
-    required this.parkingLots,
-    required this.maintenanceCharges,
-    required this.society,
-  });
+    this.properties,
+    this.elections,
+    this.committeeMembers,
+    this.nominees,
+    this.votes,
+    this.pollVotes,
+    this.events,
+    this.parkingLots,
+    this.maintenanceCharges,
+    this.society,
+  }) {
+    id = int.parse(Uuid().v4().replaceAll('-', ''), radix: 16);
+  }
 
   // Method to convert User object to JSON
   Map<String, dynamic> toJson() {
@@ -56,18 +59,18 @@ class User {
       'password': password,
       'role': role.toString().split('.').last, // Convert enum to string
       'phone': phone,
-      'properties': properties?.map((property) => property.toJson())?.toList(),
-      'elections': elections?.map((election) => election.toJson())?.toList(),
+      'properties': properties?.map((property) => property.toJson()).toList(),
+      'elections': elections?.map((election) => election.toJson()).toList(),
       'committeeMembers':
-          committeeMembers?.map((member) => member.toJson())?.toList(),
-      'nominees': nominees?.map((nominee) => nominee.toJson())?.toList(),
-      'votes': votes?.map((vote) => vote.toJson())?.toList(),
-      'pollVotes': pollVotes?.map((pollVote) => pollVote.toJson())?.toList(),
-      'events': events?.map((event) => event.toJson())?.toList(),
+          committeeMembers?.map((member) => member.toJson()).toList(),
+      'nominees': nominees?.map((nominee) => nominee.toJson()).toList(),
+      'votes': votes?.map((vote) => vote.toJson()).toList(),
+      'pollVotes': pollVotes?.map((pollVote) => pollVote.toJson()).toList(),
+      'events': events?.map((event) => event.toJson()).toList(),
       'parkingLots':
-          parkingLots?.map((parkingLot) => parkingLot.toJson())?.toList(),
+          parkingLots?.map((parkingLot) => parkingLot.toJson()).toList(),
       'maintenanceCharges':
-          maintenanceCharges?.map((charge) => charge.toJson())?.toList(),
+          maintenanceCharges?.map((charge) => charge.toJson()).toList(),
       'society': society?.toJson(),
     };
   }
