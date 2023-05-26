@@ -1,5 +1,5 @@
-import 'package:admin/models/maintenance_charge.dart';
-import 'package:admin/models/user.dart';
+import 'package:housing_society_management/models/maintenance_charge.dart';
+import 'package:housing_society_management/models/user.dart';
 
 class MaintenancePayment {
   int id;

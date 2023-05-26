@@ -1,5 +1,5 @@
-import 'package:admin/responsive.dart';
-import 'package:admin/screens/dashboard/components/my_fields.dart';
+import 'package:housing_society_management/responsive.dart';
+import 'package:housing_society_management/screens/dashboard/components/my_fields.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';

@@ -1,8 +1,10 @@
-import 'package:admin/constants.dart';
-import 'package:admin/controllers/MenuAppController.dart';
-import 'package:admin/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:housing_society_management/constants.dart';
+import 'package:housing_society_management/controllers/MenuAppController.dart';
+import 'package:housing_society_management/screens/main/main_screen.dart';
+import 'package:housing_society_management/screens/property_screen.dart';
+import 'package:housing_society_management/screens/user_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -28,7 +30,9 @@ class MyApp extends StatelessWidget {
             create: (context) => MenuAppController(),
           ),
         ],
-        child: MainScreen(),
+        // child: MainScreen(),
+        // child: UserScreen(),
+        child: PropertyScreen(),
       ),
     );
   }

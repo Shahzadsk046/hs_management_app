@@ -1,5 +1,5 @@
-import 'package:admin/models/user.dart';
-import 'package:admin/services/user_service.dart';
+import 'package:housing_society_management/models/user.dart';
+import 'package:housing_society_management/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -364,27 +364,25 @@ class _UserScreenState extends State<UserScreen> {
         },
         child: Icon(Icons.add),
       ),
-      bottomNavigationBar: _selectedUser != null
-          ? BottomNavigationBar(
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.edit),
-                  label: 'Edit',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.delete),
-                  label: 'Delete',
-                ),
-              ],
-              onTap: (index) {
-                if (index == 0) {
-                  showUpdateUserModal(context, _selectedUser);
-                } else if (index == 1) {
-                  deleteUser(_selectedUser);
-                }
-              },
-            )
-          : null,
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.edit),
+            label: 'Edit',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.delete),
+            label: 'Delete',
+          ),
+        ],
+        onTap: (index) {
+          if (index == 0) {
+            showUpdateUserModal(context, _selectedUser);
+          } else if (index == 1) {
+            deleteUser(_selectedUser);
+          }
+        },
+      ),
     );
   }
 }

@@ -1,7 +1,7 @@
-import 'package:admin/models/property.dart';
-import 'package:admin/models/society_expense.dart';
-import 'package:admin/models/society_property_variant.dart';
-import 'package:admin/models/user.dart';
+import 'package:housing_society_management/models/property.dart';
+import 'package:housing_society_management/models/society_expense.dart';
+import 'package:housing_society_management/models/society_property_variant.dart';
+import 'package:housing_society_management/models/user.dart';
 
 class Society {
   int id;

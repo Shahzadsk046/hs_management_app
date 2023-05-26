@@ -1,13 +1,13 @@
-import 'package:admin/models/committee_member.dart';
-import 'package:admin/models/election.dart';
-import 'package:admin/models/event.dart';
-import 'package:admin/models/maintenance_charge.dart';
-import 'package:admin/models/nominee.dart';
-import 'package:admin/models/parking_lot.dart';
-import 'package:admin/models/poll_vote.dart';
-import 'package:admin/models/property.dart';
-import 'package:admin/models/society.dart';
-import 'package:admin/models/vote.dart';
+import 'package:housing_society_management/models/committee_member.dart';
+import 'package:housing_society_management/models/election.dart';
+import 'package:housing_society_management/models/event.dart';
+import 'package:housing_society_management/models/maintenance_charge.dart';
+import 'package:housing_society_management/models/nominee.dart';
+import 'package:housing_society_management/models/parking_lot.dart';
+import 'package:housing_society_management/models/poll_vote.dart';
+import 'package:housing_society_management/models/property.dart';
+import 'package:housing_society_management/models/society.dart';
+import 'package:housing_society_management/models/vote.dart';
 import 'package:uuid/uuid.dart';
 
 class User {

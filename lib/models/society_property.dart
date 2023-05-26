@@ -1,6 +1,6 @@
-import 'package:admin/models/property.dart';
-import 'package:admin/models/society.dart';
-import 'package:admin/models/society_property_variant.dart';
+import 'package:housing_society_management/models/property.dart';
+import 'package:housing_society_management/models/society.dart';
+import 'package:housing_society_management/models/society_property_variant.dart';
 
 class SocietyProperty {
   int id;

@@ -1,4 +1,4 @@
-import 'package:admin/models/user.dart';
+import 'package:housing_society_management/models/user.dart';
 
 class Property {
   int id;
@@ -7,8 +7,9 @@ class Property {
   String description;
   double price;
   bool isAvailable;
-  int ownerId;
   User? owner;
+  // int ownerId;
+  // User? owner;
 
   Property({
     required this.id,
@@ -17,7 +18,7 @@ class Property {
     required this.description,
     required this.price,
     required this.isAvailable,
-    required this.ownerId,
+    // required this.ownerId,
     required this.owner,
   });
 
@@ -30,8 +31,9 @@ class Property {
       'description': description,
       'price': price,
       'isAvailable': isAvailable,
-      'ownerId': ownerId,
+      // 'ownerId': ownerId,
       'owner': owner?.toJson(),
+      // 'owner': owner.toJson(),
     };
   }
 
@@ -44,12 +46,25 @@ class Property {
       description: json['description'],
       price: json['price'],
       isAvailable: json['isAvailable'],
-      ownerId: json['ownerId'],
+      // ownerId: json['ownerId'],
+      // owner: User.fromJson(json['owner']),
       owner: json['owner'] != null ? User.fromJson(json['owner']) : null,
     );
   }
 
+  void toggleAvailability() {
+    isAvailable = !isAvailable;
+  }
+
+  bool isOwnedBy(User user) {
+    return owner?.id == user.id;
+  }
   // ... other methods and validations ...
+
+  @override
+  String toString() {
+    return 'Property(id: $id, type: $type, title: $title)';
+  }
 }
 
 enum PropertyType {

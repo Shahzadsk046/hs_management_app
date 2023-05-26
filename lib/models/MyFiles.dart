@@ -1,4 +1,4 @@
-import 'package:admin/constants.dart';
+import 'package:housing_society_management/constants.dart';
 import 'package:flutter/material.dart';
 
 class CloudStorageInfo {

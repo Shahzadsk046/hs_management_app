@@ -1,7 +1,7 @@
-import 'dart:convert';
-import 'package:admin/models/user.dart';
-import 'package:admin/services/api/api_service.dart';
-import 'package:http/http.dart' as http;
+// import 'dart:convert';
+import 'package:housing_society_management/models/user.dart';
+import 'package:housing_society_management/services/api/api_service.dart';
+// import 'package:http/http.dart' as http;
 
 class UserService {
   final ApiService _apiService = ApiService();

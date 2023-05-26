@@ -1,6 +1,6 @@
-import 'package:admin/models/poll.dart';
-import 'package:admin/models/poll_option.dart';
-import 'package:admin/models/user.dart';
+import 'package:housing_society_management/models/poll.dart';
+import 'package:housing_society_management/models/poll_option.dart';
+import 'package:housing_society_management/models/user.dart';
 
 class PollVote {
   int id;

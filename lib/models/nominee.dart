@@ -1,5 +1,5 @@
-import 'package:admin/models/election.dart';
-import 'package:admin/models/user.dart';
+import 'package:housing_society_management/models/election.dart';
+import 'package:housing_society_management/models/user.dart';
 
 class Nominee {
   int id;

@@ -1,5 +1,5 @@
-import 'package:admin/models/society.dart';
-import 'package:admin/models/user.dart';
+import 'package:housing_society_management/models/society.dart';
+import 'package:housing_society_management/models/user.dart';
 
 class SocietyExpense {
   int id;

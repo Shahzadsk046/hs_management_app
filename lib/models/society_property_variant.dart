@@ -1,4 +1,4 @@
-import 'package:admin/models/society.dart';
+import 'package:housing_society_management/models/society.dart';
 
 class SocietyPropertyVariant {
   int id;
