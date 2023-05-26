@@ -4,6 +4,7 @@ import 'package:housing_society_management/models/user.dart';
 class Nominee {
   int id;
   int userId;
+  String name;
   int electionId;
   User? user;
   Election? election;
@@ -11,6 +12,7 @@ class Nominee {
   Nominee({
     required this.id,
     required this.userId,
+    required this.name,
     required this.electionId,
     this.user,
     this.election,
@@ -21,6 +23,7 @@ class Nominee {
     return {
       'id': id,
       'userId': userId,
+      'name': name,
       'electionId': electionId,
       'user': user?.toJson(),
       'election': election?.toJson(),
@@ -32,6 +35,7 @@ class Nominee {
     return Nominee(
       id: json['id'],
       userId: json['userId'],
+      name: json['name'],
       electionId: json['electionId'],
       user: json['user'] != null ? User.fromJson(json['user']) : null,
       election:

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_society_management/constants.dart';
 import 'package:housing_society_management/controllers/MenuAppController.dart';
+import 'package:housing_society_management/screens/election_screen.dart';
 import 'package:housing_society_management/screens/main/main_screen.dart';
 import 'package:housing_society_management/screens/property_screen.dart';
 import 'package:housing_society_management/screens/user_screen.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
         ],
         // child: MainScreen(),
         // child: UserScreen(),
-        child: PropertyScreen(),
+        // child: PropertyScreen(),
+        child: ElectionScreen(),
       ),
     );
   }

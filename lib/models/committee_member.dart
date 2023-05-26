@@ -4,6 +4,7 @@ import 'package:housing_society_management/models/user.dart';
 class CommitteeMember {
   int id;
   int userId;
+  String name;
   int electionId;
   UserRole role;
   User? user;
@@ -12,6 +13,7 @@ class CommitteeMember {
   CommitteeMember({
     required this.id,
     required this.userId,
+    required this.name,
     required this.electionId,
     required this.role,
     required this.user,
@@ -23,6 +25,7 @@ class CommitteeMember {
     return {
       'id': id,
       'userId': userId,
+      'name': name,
       'electionId': electionId,
       'role': role.getString(),
       'user': user?.toJson(),
@@ -35,6 +38,7 @@ class CommitteeMember {
     return CommitteeMember(
       id: json['id'],
       userId: json['userId'],
+      name: json['name'],
       electionId: json['electionId'],
       role: UserRoleExtension.fromString(json['role']),
       user: json['user'] != null ? User.fromJson(json['user']) : null,
