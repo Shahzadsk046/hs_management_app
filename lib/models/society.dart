@@ -4,14 +4,14 @@ import 'package:housing_society_management/models/society_property_variant.dart'
 import 'package:housing_society_management/models/user.dart';
 
 class Society {
-  int id;
-  String name;
-  String address;
-  int adminId;
-  User? admin;
-  List<Property> properties;
-  List<SocietyPropertyVariant> propertyVariants;
-  List<SocietyExpense> expenses;
+  final int id;
+  final String name;
+  final String address;
+  final int adminId;
+  final User? admin;
+  final List<Property> properties;
+  final List<SocietyPropertyVariant> propertyVariants;
+  final List<SocietyExpense> expenses;
 
   Society({
     required this.id,
@@ -63,4 +63,47 @@ class Society {
   }
 
   // ... other methods and validations ...
+
+  int get totalProperties => properties.length;
+
+  int get totalExpenses => expenses.length;
+
+  double get totalExpenseAmount {
+    double total = 0;
+    for (var expense in expenses) {
+      total += expense.amount;
+    }
+    return total;
+  }
+
+  void addProperty(Property property) {
+    properties.add(property);
+  }
+
+  void removeProperty(Property property) {
+    properties.remove(property);
+  }
+
+  Future<void> createExpense(SocietyExpense expense) async {
+    // Implement createExpense method logic here
+    // Add the expense to the expenses list
+    expenses.add(expense);
+  }
+
+  Future<void> deleteExpense(SocietyExpense expense) async {
+    // Implement deleteExpense method logic here
+    // Remove the expense from the expenses list
+    expenses.remove(expense);
+  }
+
+  Future<void> updateExpense(SocietyExpense expense) async {
+    // Implement updateExpense method logic here
+    // Find the expense in the expenses list and update its details
+    for (var i = 0; i < expenses.length; i++) {
+      if (expenses[i].id == expense.id) {
+        expenses[i] = expense;
+        break;
+      }
+    }
+  }
 }

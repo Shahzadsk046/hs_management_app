@@ -5,6 +5,7 @@ import 'package:housing_society_management/controllers/MenuAppController.dart';
 import 'package:housing_society_management/screens/election_screen.dart';
 import 'package:housing_society_management/screens/main/main_screen.dart';
 import 'package:housing_society_management/screens/property_screen.dart';
+import 'package:housing_society_management/screens/society_screen.dart';
 import 'package:housing_society_management/screens/user_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
         // child: MainScreen(),
         // child: UserScreen(),
         // child: PropertyScreen(),
-        child: ElectionScreen(),
+        // child: ElectionScreen(),
+        child: SocietyScreen(),
       ),
     );
   }
