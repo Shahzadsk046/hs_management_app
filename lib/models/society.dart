@@ -32,10 +32,10 @@ class Society {
       'address': address,
       'adminId': adminId,
       'admin': admin?.toJson(),
-      'properties': properties?.map((property) => property.toJson())?.toList(),
+      'properties': properties.map((property) => property.toJson()).toList(),
       'propertyVariants':
-          propertyVariants?.map((variant) => variant.toJson())?.toList(),
-      'expenses': expenses?.map((expense) => expense.toJson())?.toList(),
+          propertyVariants.map((variant) => variant.toJson()).toList(),
+      'expenses': expenses.map((expense) => expense.toJson()).toList(),
     };
   }
 

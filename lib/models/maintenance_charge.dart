@@ -31,7 +31,7 @@ class MaintenanceCharge {
       'title': title,
       'description': description,
       'amount': amount,
-      'dueDate': dueDate?.toIso8601String(),
+      'dueDate': dueDate.toIso8601String(),
       'createdBy': createdBy,
       'societyId': societyId,
       'creator': creator?.toJson(),

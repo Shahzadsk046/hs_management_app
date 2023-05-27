@@ -26,7 +26,7 @@ class MaintenancePayment {
       'id': id,
       'userId': userId,
       'maintenanceChargeId': maintenanceChargeId,
-      'paymentDate': paymentDate?.toIso8601String(),
+      'paymentDate': paymentDate.toIso8601String(),
       'amount': amount,
       'user': user?.toJson(),
       'maintenanceCharge': maintenanceCharge?.toJson(),
