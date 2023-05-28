@@ -24,7 +24,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
             'phone' => 'required|string',
-            'user_role_id' => 'required|exists:user_roles,id',
+            'role' => 'required|exists:user_roles,id',
             // Add any additional validation rules as per your requirements
         ]);
 
@@ -33,7 +33,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
-            'user_role_id' => $request->user_role_id,
+            'role' => $request->role,
             // Add any additional fields as per your user model
         ]);
 
@@ -51,7 +51,7 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'phone' => 'required|string',
-            'user_role_id' => 'required|exists:user_roles,id',
+            'role' => 'required|exists:user_roles,id',
             // Add any additional validation rules as per your requirements
         ]);
 
@@ -59,7 +59,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'user_role_id' => $request->user_role_id,
+            'role' => $request->role,
             // Update any additional fields as per your user model
         ]);
 

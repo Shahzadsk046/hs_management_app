@@ -18,8 +18,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone');
+            $table->string('role');
             // $table->unsignedBigInteger('user_role_id');
-            $table->foreignId('user_role_id')->constrained('user_roles');
+            // $table->foreignId('user_role_id')->constrained('user_roles');
             $table->rememberToken();
             $table->timestamps();
 

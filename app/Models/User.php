@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'user_role_id',
+        'role',
     ];
 
     /**
@@ -45,10 +45,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function role()
-    {
-        return $this->belongsTo(UserRole::class, 'user_role_id');
-    }
+    // public function role()
+    // {
+    //     return $this->belongsTo(UserRole::class, 'role');
+    // }
     public function properties()
     {
         return $this->hasMany(Property::class);
@@ -99,8 +99,8 @@ class User extends Authenticatable
         return $this->belongsTo(Society::class);
     }
 
-    public function userRole()
-    {
-        return $this->belongsTo(UserRole::class);
-    }
+    // public function userRole()
+    // {
+    //     return $this->belongsTo(UserRole::class);
+    // }
 }

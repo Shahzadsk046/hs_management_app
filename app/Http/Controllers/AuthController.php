@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -15,7 +16,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|min:8',
             'phone' => 'required|string',
-            'user_role_id' => 'required|exists:user_roles,id',
+            'role' => 'required|string',
         ]);
 
         $user = User::create([
@@ -23,7 +24,7 @@ class AuthController extends Controller
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
             'phone' => $validatedData['phone'],
-            'user_role_id' => $validatedData['user_role_id']
+            'role' => $validatedData['role']
         ]);
 
         // $user->userRole()->associate($validatedData['user_role']);
@@ -31,7 +32,7 @@ class AuthController extends Controller
 
         $token = $user->createToken('authToken')->plainTextToken;
 
-        return response()->json(['token' => $token], 201);
+        return response()->json(['message' => 'User registered successfully', 'user' => $user, 'token' => $token]);
     }
 
     public function login(Request $request)
@@ -41,7 +42,7 @@ class AuthController extends Controller
         //     'password' => 'required|string',
         // ]);
 
-        $request->validate([
+        $validatedData = $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
@@ -52,10 +53,18 @@ class AuthController extends Controller
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
+        // $user = User::where('email', $validatedData['email'])->first();
+
+        // if (!$user || !bcrypt::check($validatedData['password'], $user->password)) {
+        //     throw ValidationException::withMessages([
+        //         'email' => ['The provided credentials are incorrect.'],
+        //     ]);
+        // }
+
         $user = auth()->user();
         $token = $user->createToken('authToken')->plainTextToken;
 
-        return response()->json(['user' => $user, 'token' => $token], 200);
+        return response()->json(['message' => 'User authenticated successfully', 'user' => $user, 'role' => $user->role, 'token' => $token]);
     }
 
     public function logout(Request $request)
