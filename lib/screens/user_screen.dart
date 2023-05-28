@@ -3,6 +3,8 @@ import 'package:housing_society_management/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
+const List<String> list = <String>['Owner', 'Tenant'];
+
 class UserScreen extends StatefulWidget {
   @override
   _UserScreenState createState() => _UserScreenState();
@@ -15,8 +17,7 @@ class _UserScreenState extends State<UserScreen> {
   List<User> _users = [];
   late User _selectedUser;
   bool _isLoading = false;
-  UserRole? _selectedRole;
-
+  String _selectedRole = list.first;
   @override
   void initState() {
     super.initState();
@@ -116,6 +117,8 @@ class _UserScreenState extends State<UserScreen> {
     String _email = '';
     String _password = '';
     String _phone = '';
+    String userRole = list.first;
+
     // UserRole _role;
 
     showDialog(
@@ -179,21 +182,50 @@ class _UserScreenState extends State<UserScreen> {
                     _phone = value ?? '';
                   },
                 ),
-                DropdownButtonFormField<UserRole>(
-                  value: _selectedRole,
-                  onChanged: (UserRole? value) {
-                    setState(() {
-                      _selectedRole = value;
-                    });
-                  },
-                  items: UserRole.values.map((UserRole role) {
-                    return DropdownMenuItem<UserRole>(
-                      value: role,
-                      child: Text(role.toString().split('.').last),
+                // DropdownButtonFormField<UserRole>(
+                //   value: _selectedRole,
+                //   onChanged: (UserRole? value) {
+                //     setState(() {
+                //       _selectedRole = value;
+                //     });
+                //   },
+                //   items: UserRole.values.map((UserRole role) {
+                //     return DropdownMenuItem<UserRole>(
+                //       value: role,
+                //       child: Text(role.toString().split('.').last),
+                //     );
+                //   }).toList(),
+                //   decoration: InputDecoration(
+                //     labelText: 'Role',
+                //   ),
+                // ),
+                DropdownButtonFormField<String>(
+                  value: userRole,
+                  hint: Text('User Type'),
+                  items: list.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
                     );
                   }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      userRole = newValue!;
+                      // Handle selected option
+                      print('Selected option: $userRole');
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.arrow_drop_down_circle,
+                    color: Colors.deepPurple,
+                  ),
+                  dropdownColor: Colors.deepPurple.shade50,
                   decoration: InputDecoration(
-                    labelText: 'Role',
+                    labelText: "User Type",
+                    // prefixIcon: Icon(
+                    //   Icons.accessibility_new_rounded,
+                    //   color: Colors.deepPurple,
+                    // )
                   ),
                 ),
                 ElevatedButton(
@@ -207,7 +239,7 @@ class _UserScreenState extends State<UserScreen> {
                           email: _email,
                           password: _password,
                           phone: _phone,
-                          user_role_id: _selectedRole);
+                          role: _selectedRole);
                       createUser(newUser);
                       Navigator.of(context).pop();
                     }
@@ -228,6 +260,7 @@ class _UserScreenState extends State<UserScreen> {
     String _email = user.email;
     String _password = user.password;
     String _phone = user.phone;
+    String userRole = list.first;
 
     showDialog(
       context: context,
@@ -294,21 +327,50 @@ class _UserScreenState extends State<UserScreen> {
                     _phone = value ?? '';
                   },
                 ),
-                DropdownButtonFormField<UserRole>(
-                  value: _selectedRole,
-                  onChanged: (UserRole? value) {
-                    setState(() {
-                      _selectedRole = value;
-                    });
-                  },
-                  items: UserRole.values.map((UserRole role) {
-                    return DropdownMenuItem<UserRole>(
-                      value: role,
-                      child: Text(role.toString().split('.').last),
+                // DropdownButtonFormField<UserRole>(
+                //   value: _selectedRole,
+                //   onChanged: (UserRole? value) {
+                //     setState(() {
+                //       _selectedRole = value;
+                //     });
+                //   },
+                //   items: UserRole.values.map((UserRole role) {
+                //     return DropdownMenuItem<UserRole>(
+                //       value: role,
+                //       child: Text(role.toString().split('.').last),
+                //     );
+                //   }).toList(),
+                //   decoration: InputDecoration(
+                //     labelText: 'Role',
+                //   ),
+                // ),
+                DropdownButtonFormField<String>(
+                  value: userRole,
+                  hint: Text('User Type'),
+                  items: list.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
                     );
                   }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      userRole = newValue!;
+                      // Handle selected option
+                      print('Selected option: $userRole');
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.arrow_drop_down_circle,
+                    color: Colors.deepPurple,
+                  ),
+                  dropdownColor: Colors.deepPurple.shade50,
                   decoration: InputDecoration(
-                    labelText: 'Role',
+                    labelText: "User Type",
+                    // prefixIcon: Icon(
+                    //   Icons.accessibility_new_rounded,
+                    //   color: Colors.deepPurple,
+                    // )
                   ),
                 ),
                 ElevatedButton(
@@ -321,7 +383,7 @@ class _UserScreenState extends State<UserScreen> {
                         email: _email,
                         password: _password,
                         phone: _phone,
-                        user_role_id: _selectedRole,
+                        role: _selectedRole,
                       );
                       updateUser(updatedUser);
                       Navigator.of(context).pop();

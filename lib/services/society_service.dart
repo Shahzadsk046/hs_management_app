@@ -308,7 +308,7 @@ class SocietyService {
       name: data['name'],
       email: data['email'],
       password: data['password'],
-      user_role_id: data['user_role_id'],
+      role: data['role'],
       phone: data['phone'],
     );
   }

@@ -15,7 +15,7 @@ class User {
   String name;
   String email;
   String password;
-  UserRole? user_role_id;
+  String role;
   String phone;
 
   List<Property>? properties;
@@ -34,7 +34,7 @@ class User {
     required this.name,
     required this.email,
     required this.password,
-    required this.user_role_id,
+    required this.role,
     required this.phone,
     this.properties,
     this.elections,
@@ -57,8 +57,8 @@ class User {
       'name': name,
       'email': email,
       'password': password,
-      'user_role_id':
-          user_role_id.toString().split('.').last, // Convert enum to string
+      'role': role,
+      // role.toString().split('.').last, // Convert enum to string
       'phone': phone,
       'properties': properties?.map((property) => property.toJson()).toList(),
       'elections': elections?.map((election) => election.toJson()).toList(),
@@ -83,8 +83,9 @@ class User {
       name: json['name'],
       email: json['email'],
       password: json['password'],
-      user_role_id: UserRoleExtension.fromString(
-          json['user_role_id']), // Convert string to enum
+      role: json['role'],
+      // UserRoleExtension.fromString(
+      //     json['role']), // Convert string to enum
       phone: json['phone'],
       properties: json['properties'] != null
           ? List<Property>.from(json['properties']
@@ -130,22 +131,22 @@ class User {
   // ... other methods and validations ...
 }
 
-enum UserRole {
-  admin,
-  owner,
-  tenant,
-}
+// enum UserRole {
+//   admin,
+//   owner,
+//   tenant,
+// }
 
-// Extension to convert string to UserRole enum
-extension UserRoleExtension on UserRole {
-  static UserRole fromString(String value) {
-    return UserRole.values.firstWhere(
-      (role) =>
-          role.toString().split('.').last.toLowerCase() == value.toLowerCase(),
-    );
-  }
+// // Extension to convert string to UserRole enum
+// extension UserRoleExtension on UserRole {
+//   static UserRole fromString(String value) {
+//     return UserRole.values.firstWhere(
+//       (role) =>
+//           role.toString().split('.').last.toLowerCase() == value.toLowerCase(),
+//     );
+//   }
 
-  String getString() {
-    return this.toString().split('.').last;
-  }
-}
+//   String getString() {
+//     return this.toString().split('.').last;
+//   }
+// }

@@ -6,7 +6,7 @@ class CommitteeMember {
   int userId;
   String name;
   int electionId;
-  UserRole role;
+  String role;
   User? user;
   Election? election;
 
@@ -27,7 +27,7 @@ class CommitteeMember {
       'userId': userId,
       'name': name,
       'electionId': electionId,
-      'role': role.getString(),
+      'role': role,
       'user': user?.toJson(),
       'election': election?.toJson(),
     };
@@ -40,7 +40,7 @@ class CommitteeMember {
       userId: json['userId'],
       name: json['name'],
       electionId: json['electionId'],
-      role: UserRoleExtension.fromString(json['role']),
+      role: json['role'],
       user: json['user'] != null ? User.fromJson(json['user']) : null,
       election:
           json['election'] != null ? Election.fromJson(json['election']) : null,

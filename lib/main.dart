@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),
-        '/home': (context) => MainScreen(),
+        // '/home': (context) => MainScreen(),
+        '/home': (context) => UserScreen(),
       },
       home: MultiProvider(
         providers: [
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         // child: UserScreen(),
         // child: PropertyScreen(),
         // child: ElectionScreen(),
-        child: SocietyScreen(),
+        // child: SocietyScreen(),
       ),
     );
   }
