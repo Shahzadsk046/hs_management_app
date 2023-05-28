@@ -1,10 +1,108 @@
 // import 'dart:convert';
+import 'dart:convert';
+
 import 'package:housing_society_management/models/user.dart';
 import 'package:housing_society_management/services/api/api_service.dart';
 // import 'package:http/http.dart' as http;
 
 class UserService {
   final ApiService _apiService = ApiService();
+
+  Future<Map<String, dynamic>?> login(String email, String password) async {
+    // final url = Uri.parse('your_login_api_url_here');
+    final body = {
+      'email': email,
+      'password': password,
+    };
+
+    final response = await _apiService.post("/login", body);
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      return responseData;
+    } else {
+      // Handle error case, such as displaying error message
+      return null;
+    }
+  }
+
+  // Future<dynamic> register(
+  //   String name,
+  //   String email,
+  //   String password,
+  //   String phone,
+  //   String role,
+  // ) async {
+  // final url =
+  //     'your_api_endpoint/register'; // Replace with your actual registration API endpoint
+
+  // final response = await _apiService.post(
+  //   '/register',
+  //   {
+  //     'name': name,
+  //     'email': email,
+  //     'password': password,
+  //     'phone': phone,
+  //     'role': role,
+  //   },
+  // );
+
+  //   if (response.statusCode == 200) {
+  //     // Registration successful
+  //     return jsonDecode(response.body);
+  //   } else {
+  //     // Registration failed
+  //     throw Exception('Registration failed: ${response.statusCode}');
+  //   }
+  // }
+
+  Future<Map<String, dynamic>> register(
+    String name,
+    String email,
+    String password,
+    String phone,
+    int userRoles, // Added userRoles parameter
+  ) async {
+    // Construct the request body
+    final body = {
+      'name': name,
+      'email': email,
+      'password': password,
+      'phone': phone,
+      'user_role_id':
+          userRoles, // Pass the userRole parameter in the request body
+    };
+
+    // Make the API request and return the response
+    final response = await _apiService.post(
+      '/register',
+      jsonEncode(body),
+      // {'Content-Type': 'application/json'},
+    );
+
+    // Parse the response and return it
+    return jsonDecode(response.body);
+  }
+
+  Future<dynamic> sendResetPasswordEmail(String email) async {
+    // Perform the logic to send the reset password email
+    // You can make an HTTP request to your API endpoint using the 'http' package
+
+    // final url = Uri.parse('/reset-password');
+    final response = await _apiService.post(
+      '/reset-password',
+      {'email': email},
+    );
+
+    // Handle the response from the API
+    if (response.statusCode == 200) {
+      // Reset password email sent successfully
+      print('Password reset email sent to $email');
+    } else {
+      // Failed to send reset password email
+      print('Failed to send reset password email');
+    }
+  }
 
   // Future<List<User>> getUsers() async {
   //   final response = await http.get(Uri.parse(baseUrl));

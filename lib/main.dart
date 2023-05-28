@@ -3,8 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_society_management/constants.dart';
 import 'package:housing_society_management/controllers/MenuAppController.dart';
 import 'package:housing_society_management/screens/election_screen.dart';
+import 'package:housing_society_management/screens/login_screen.dart';
 import 'package:housing_society_management/screens/main/main_screen.dart';
 import 'package:housing_society_management/screens/property_screen.dart';
+import 'package:housing_society_management/screens/register_screen.dart';
 import 'package:housing_society_management/screens/society_screen.dart';
 import 'package:housing_society_management/screens/user_screen.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +28,12 @@ class MyApp extends StatelessWidget {
             .apply(bodyColor: Colors.white),
         canvasColor: secondaryColor,
       ),
+      initialRoute: '/register',
+      routes: {
+        '/login': (context) => LoginScreen(),
+        '/register': (context) => RegisterScreen(),
+        '/home': (context) => MainScreen(),
+      },
       home: MultiProvider(
         providers: [
           ChangeNotifierProvider(

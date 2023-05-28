@@ -207,7 +207,7 @@ class _UserScreenState extends State<UserScreen> {
                           email: _email,
                           password: _password,
                           phone: _phone,
-                          role: _selectedRole);
+                          user_role_id: _selectedRole);
                       createUser(newUser);
                       Navigator.of(context).pop();
                     }
@@ -321,7 +321,7 @@ class _UserScreenState extends State<UserScreen> {
                         email: _email,
                         password: _password,
                         phone: _phone,
-                        role: _selectedRole,
+                        user_role_id: _selectedRole,
                       );
                       updateUser(updatedUser);
                       Navigator.of(context).pop();

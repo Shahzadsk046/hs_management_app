@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseUrl = 'http://localhost:8000/api/';
+  static const String baseUrl = 'http://localhost:8000/api';
 
   // Helper method to handle HTTP requests
   Future<dynamic> _handleRequest(http.Response response) async {
     final body = jsonDecode(response.body);
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
+      print(body);
       return body;
     } else {
       throw body['message'] ?? 'Request failed';

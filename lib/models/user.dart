@@ -15,7 +15,7 @@ class User {
   String name;
   String email;
   String password;
-  UserRole? role;
+  UserRole? user_role_id;
   String phone;
 
   List<Property>? properties;
@@ -34,7 +34,7 @@ class User {
     required this.name,
     required this.email,
     required this.password,
-    required this.role,
+    required this.user_role_id,
     required this.phone,
     this.properties,
     this.elections,
@@ -57,7 +57,8 @@ class User {
       'name': name,
       'email': email,
       'password': password,
-      'role': role.toString().split('.').last, // Convert enum to string
+      'user_role_id':
+          user_role_id.toString().split('.').last, // Convert enum to string
       'phone': phone,
       'properties': properties?.map((property) => property.toJson()).toList(),
       'elections': elections?.map((election) => election.toJson()).toList(),
@@ -82,8 +83,8 @@ class User {
       name: json['name'],
       email: json['email'],
       password: json['password'],
-      role:
-          UserRoleExtension.fromString(json['role']), // Convert string to enum
+      user_role_id: UserRoleExtension.fromString(
+          json['user_role_id']), // Convert string to enum
       phone: json['phone'],
       properties: json['properties'] != null
           ? List<Property>.from(json['properties']
@@ -130,9 +131,9 @@ class User {
 }
 
 enum UserRole {
-  Admin,
-  Owner,
-  Tenant,
+  admin,
+  owner,
+  tenant,
 }
 
 // Extension to convert string to UserRole enum
