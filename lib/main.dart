@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_society_management/constants.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:housing_society_management/controllers/MenuAppController.dart';
-import 'package:housing_society_management/screens/election_screen.dart';
+// import 'package:housing_society_management/screens/election_screen.dart';
 import 'package:housing_society_management/screens/login_screen.dart';
-import 'package:housing_society_management/screens/main/main_screen.dart';
-import 'package:housing_society_management/screens/property_screen.dart';
+// import 'package:housing_society_management/screens/main/main_screen.dart';
+// import 'package:housing_society_management/screens/property_screen.dart';
 import 'package:housing_society_management/screens/register_screen.dart';
-import 'package:housing_society_management/screens/society_screen.dart';
+// import 'package:housing_society_management/screens/society_screen.dart';
 import 'package:housing_society_management/screens/user_screen.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  bool isConnected = await checkConnection();
+
+  if (isConnected) {
+    print('Connected to API');
+  } else {
+    print('Connection failed');
+  }
   runApp(MyApp());
 }
 
@@ -28,7 +37,7 @@ class MyApp extends StatelessWidget {
             .apply(bodyColor: Colors.white),
         canvasColor: secondaryColor,
       ),
-      initialRoute: '/register',
+      initialRoute: '/home',
       routes: {
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),
@@ -48,5 +57,23 @@ class MyApp extends StatelessWidget {
         // child: SocietyScreen(),
       ),
     );
+  }
+}
+
+Future<bool> checkConnection() async {
+  try {
+    final response =
+        await http.get(Uri.parse('http://localhost:8000/api/users'));
+
+    if (response.statusCode == 200) {
+      // Connection successful
+      return true;
+    } else {
+      // Connection failed
+      return false;
+    }
+  } catch (e) {
+    // Error occurred
+    return false;
   }
 }

@@ -274,7 +274,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } catch (e) {
       // Show error message
-      print('Error: $e');
+      // print('Error: $e');
     }
   }
 

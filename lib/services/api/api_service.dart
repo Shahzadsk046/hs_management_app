@@ -9,6 +9,7 @@ class ApiService {
     final body = jsonDecode(response.body);
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
+      print("API Service 12");
       print(body);
       return body;
     } else {
@@ -29,6 +30,10 @@ class ApiService {
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(data),
     );
+    print("I'm in API Service 32");
+    print(endpoint);
+    print("I'm in API Service 34");
+    print(data);
     return _handleRequest(response);
   }
 

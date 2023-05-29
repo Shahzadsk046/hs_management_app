@@ -84,44 +84,88 @@ class User {
       email: json['email'],
       password: json['password'],
       role: json['role'],
-      // UserRoleExtension.fromString(
-      //     json['role']), // Convert string to enum
       phone: json['phone'],
+      // properties: json['properties'] != null
+      //     ? List<Property>.from(json['properties']
+      //         .map((propertyJson) => Property.fromJson(propertyJson)))
+      //     : null,
+      // elections: json['elections'] != null
+      //     ? List<Election>.from(json['elections']
+      //         .map((electionJson) => Election.fromJson(electionJson)))
+      //     : null,
+      // committeeMembers: json['committeeMembers'] != null
+      //     ? List<CommitteeMember>.from(json['committeeMembers']
+      //         .map((memberJson) => CommitteeMember.fromJson(memberJson)))
+      //     : null,
+      // nominees: json['nominees'] != null
+      //     ? List<Nominee>.from(json['nominees']
+      //         .map((nomineeJson) => Nominee.fromJson(nomineeJson)))
+      //     : null,
+      // votes: json['votes'] != null
+      //     ? List<Vote>.from(
+      //         json['votes'].map((voteJson) => Vote.fromJson(voteJson)))
+      //     : null,
+      // pollVotes: json['pollVotes'] != null
+      //     ? List<PollVote>.from(json['pollVotes']
+      //         .map((pollVoteJson) => PollVote.fromJson(pollVoteJson)))
+      //     : null,
+      // events: json['events'] != null
+      //     ? List<Event>.from(
+      //         json['events'].map((eventJson) => Event.fromJson(eventJson)))
+      //     : null,
+      // parkingLots: json['parkingLots'] != null
+      //     ? List<ParkingLot>.from(json['parkingLots']
+      //         .map((parkingLotJson) => ParkingLot.fromJson(parkingLotJson)))
+      //     : null,
+      // maintenanceCharges: json['maintenanceCharges'] != null
+      //     ? List<MaintenanceCharge>.from(json['maintenanceCharges']
+      //         .map((chargeJson) => MaintenanceCharge.fromJson(chargeJson)))
+      //     : null,
+      // society:
+      //     json['society'] != null ? Society.fromJson(json['society']) : null,
+
       properties: json['properties'] != null
-          ? List<Property>.from(json['properties']
-              .map((propertyJson) => Property.fromJson(propertyJson)))
+          ? (json['properties'] as List)
+              .map((item) => Property.fromJson(item))
+              .toList()
           : null,
       elections: json['elections'] != null
-          ? List<Election>.from(json['elections']
-              .map((electionJson) => Election.fromJson(electionJson)))
+          ? (json['elections'] as List)
+              .map((item) => Election.fromJson(item))
+              .toList()
           : null,
       committeeMembers: json['committeeMembers'] != null
-          ? List<CommitteeMember>.from(json['committeeMembers']
-              .map((memberJson) => CommitteeMember.fromJson(memberJson)))
+          ? (json['committeeMembers'] as List)
+              .map((item) => CommitteeMember.fromJson(item))
+              .toList()
           : null,
       nominees: json['nominees'] != null
-          ? List<Nominee>.from(json['nominees']
-              .map((nomineeJson) => Nominee.fromJson(nomineeJson)))
+          ? (json['nominees'] as List)
+              .map((item) => Nominee.fromJson(item))
+              .toList()
           : null,
       votes: json['votes'] != null
-          ? List<Vote>.from(
-              json['votes'].map((voteJson) => Vote.fromJson(voteJson)))
+          ? (json['votes'] as List).map((item) => Vote.fromJson(item)).toList()
           : null,
       pollVotes: json['pollVotes'] != null
-          ? List<PollVote>.from(json['pollVotes']
-              .map((pollVoteJson) => PollVote.fromJson(pollVoteJson)))
+          ? (json['pollVotes'] as List)
+              .map((item) => PollVote.fromJson(item))
+              .toList()
           : null,
       events: json['events'] != null
-          ? List<Event>.from(
-              json['events'].map((eventJson) => Event.fromJson(eventJson)))
+          ? (json['events'] as List)
+              .map((item) => Event.fromJson(item))
+              .toList()
           : null,
       parkingLots: json['parkingLots'] != null
-          ? List<ParkingLot>.from(json['parkingLots']
-              .map((parkingLotJson) => ParkingLot.fromJson(parkingLotJson)))
+          ? (json['parkingLots'] as List)
+              .map((item) => ParkingLot.fromJson(item))
+              .toList()
           : null,
       maintenanceCharges: json['maintenanceCharges'] != null
-          ? List<MaintenanceCharge>.from(json['maintenanceCharges']
-              .map((chargeJson) => MaintenanceCharge.fromJson(chargeJson)))
+          ? (json['maintenanceCharges'] as List)
+              .map((item) => MaintenanceCharge.fromJson(item))
+              .toList()
           : null,
       society:
           json['society'] != null ? Society.fromJson(json['society']) : null,

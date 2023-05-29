@@ -135,8 +135,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     // final userRoles = mapUserRole(selectedRole.toString());
     if (_validateInputs(name, email, password, confirmPassword, phone, role)) {
       setState(() {
-        print(_validateInputs(
-            name, email, password, confirmPassword, phone, role));
+        // print(_validateInputs(
+        //     name, email, password, confirmPassword, phone, role));
         _isLoading = true;
       });
 
@@ -152,8 +152,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'role': userRole.toLowerCase(),
         });
 
-        print(response.statusCode);
-        print(response.body);
+        // print(response.statusCode);
+        // print(response.body);
 
         if (response.statusCode == 200) {
           // User registration successful
@@ -168,12 +168,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
           // Perform any necessary actions (e.g., show success message, navigate to home screen)
         } else {
           // User registration failed
-          print('Error: ${response.statusCode}');
+          // print('Error: ${response.statusCode}');
           // Handle error (e.g., show error message)
         }
       } catch (e) {
         // Error occurred during API call
-        print('Error: $e');
+        // print('Error: $e');
         // Handle error (e.g., show error message)
       }
 
