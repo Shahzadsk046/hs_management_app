@@ -14,7 +14,10 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return response()->json($users);
+        return response()->json([
+            'status' => 'success',
+            'data' => $users
+        ]);
     }
 
     public function store(Request $request)
@@ -23,53 +26,65 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
-            'phone' => 'required|string',
-            'role' => 'required|exists:user_roles,id',
+            'phone' => 'required|',
+            'role' => 'required|string',
             // Add any additional validation rules as per your requirements
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'phone' => $request->phone,
-            'role' => $request->role,
-            // Add any additional fields as per your user model
-        ]);
+        // $user = User::create($validatedData);
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->phone = $request->input('phone');
+        $user->role = $request->input('role');
+        $user->save();
 
         return response()->json($user, 201);
     }
 
-    public function show(User $user)
+    public function show($id)
     {
+        // Find the user by ID
+        $user = User::findOrFail($id);
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        // Return the user
         return response()->json($user);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        $request->validate([
+        // Find the user by ID
+        $user = User::findOrFail($id);
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        $validatedData = $request->validate([
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'email' => 'required|email|unique:users,email,' . $id,
             'phone' => 'required|string',
-            'role' => 'required|exists:user_roles,id',
+            'role' => 'required|string',
             // Add any additional validation rules as per your requirements
         ]);
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'role' => $request->role,
-            // Update any additional fields as per your user model
-        ]);
+        $user->update($validatedData);
 
         return response()->json($user);
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
+        // Find the user by ID
+        $user = User::findOrFail($id);
+
         $user->delete();
-        return response()->json(['message' => 'User deleted']);
+        return response()->json(['message' => 'User deleted Successfully']);
     }
 
     /**
@@ -129,7 +144,7 @@ class UserController extends Controller
     }
 
     /**
-     * Get the elections associated with a user.
+     * Get the committee members associated with a user.
      *
      * @param int $userId
      * @return \Illuminate\Http\JsonResponse
@@ -142,87 +157,110 @@ class UserController extends Controller
         return response()->json(['committeeMembers' => $committeeMembers]);
     }
 
-    /**
-     * Get the elections associated with a user.
-     *
-     * @param int $userId
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getNominees($userId)
+    // /**
+    //  * Get the nominees associated with a user.
+    //  *
+    //  * @param int $userId
+    //  * @return \Illuminate\Http\JsonResponse
+    //  */
+    // public function getNominees($userId)
+    // {
+    //     $user = User::findOrFail($userId);
+    //     $nominees = $user->nominees;
+
+    //     return response()->json(['nominees' => $nominees]);
+    // }
+
+    // /**
+    //  * Get the votes associated with a user.
+    //  *
+    //  * @param int $userId
+    //  * @return \Illuminate\Http\JsonResponse
+    //  */
+    // public function getVotes($userId)
+    // {
+    //     $user = User::findOrFail($userId);
+    //     $votes = $user->votes;
+
+    //     return response()->json(['votes' => $votes]);
+    // }
+
+    // /**
+    //  * Get the poll votes associated with a user.
+    //  *
+    //  * @param int $userId
+    //  * @return \Illuminate\Http\JsonResponse
+    //  */
+    // public function getPollVotes($userId)
+    // {
+    //     $user = User::findOrFail($userId);
+    //     $pollVotes = $user->pollVotes;
+
+    //     return response()->json(['pollVotes' => $pollVotes]);
+    // }
+
+    // /**
+    //  * Get the events associated with a user.
+    //  *
+    //  * @param int $userId
+    //  * @return \Illuminate\Http\JsonResponse
+    //  */
+    // public function getEvents($userId)
+    // {
+    //     $user = User::findOrFail($userId);
+    //     $events = $user->events;
+
+    //     return response()->json(['events' => $events]);
+    // }
+
+    // /**
+    //  * Get the parking lots associated with a user.
+    //  *
+    //  * @param int $userId
+    //  * @return \Illuminate\Http\JsonResponse
+    //  */
+    // public function getParkingLots($userId)
+    // {
+    //     $user = User::findOrFail($userId);
+    //     $parkingLots = $user->parkingLots;
+
+    //     return response()->json(['parkingLots' => $parkingLots]);
+    // }
+
+    // /**
+    //  * Get the maintenance charges associated with a user.
+    //  *
+    //  * @param int $userId
+    //  * @return \Illuminate\Http\JsonResponse
+    //  */
+    // public function getMaintenanceCharges($userId)
+    // {
+    //     $user = User::findOrFail($userId);
+    //     $maintenanceCharges = $user->maintenanceCharges;
+
+    //     return response()->json(['maintenanceCharges' => $maintenanceCharges]);
+    // }
+
+    public function getAssociations($id)
     {
-        $user = User::findOrFail($userId);
-        $nominees = $user->nominees;
+        // Find the user by ID
+        $user = User::findOrFail($id);
 
-        return response()->json(['nominees' => $nominees]);
-    }
+        // Retrieve the associated data
+        $associations = [
+            'societies' => $user->societies,
+            'properties' => $user->properties,
+            'elections' => $user->elections,
+            'committeeMembers' => $user->committeeMembers,
+            'nominees' => $user->nominees,
+            'votes' => $user->votes,
+            'pollVotes' => $user->pollVotes,
+            'events' => $user->events,
+            'parkingLots' => $user->parkingLots,
+            'maintenanceCharges' => $user->maintenanceCharges,
+        ];
 
-    /**
-     * Get the elections associated with a user.
-     *
-     * @param int $userId
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getVotes($userId)
-    {
-        $user = User::findOrFail($userId);
-        $votes = $user->votes;
-
-        return response()->json(['votes' => $votes]);
-    }
-
-    /**
-     * Get the elections associated with a user.
-     *
-     * @param int $userId
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getPollVotes($userId)
-    {
-        $user = User::findOrFail($userId);
-        $pollVotes = $user->pollVotes;
-
-        return response()->json(['pollVotes' => $pollVotes]);
-    }
-
-    /**
-     * Get the elections associated with a user.
-     *
-     * @param int $userId
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getEvents($userId)
-    {
-        $user = User::findOrFail($userId);
-        $events = $user->events;
-
-        return response()->json(['events' => $events]);
-    }
-
-    /**
-     * Get the elections associated with a user.
-     *
-     * @param int $userId
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getParkingLots($userId)
-    {
-        $user = User::findOrFail($userId);
-        $parkingLots = $user->parkingLots;
-
-        return response()->json(['parkingLots' => $parkingLots]);
-    }
-
-    /**
-     * Get the elections associated with a user.
-     *
-     * @param int $userId
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getMaintenanceCharges($userId)
-    {
-        $user = User::findOrFail($userId);
-        $maintenanceCharges = $user->maintenanceCharges;
-
-        return response()->json(['maintenanceCharges' => $maintenanceCharges]);
+        // Return the associations
+        return response()->json($associations);
     }
 }

@@ -49,6 +49,11 @@ class User extends Authenticatable
     // {
     //     return $this->belongsTo(UserRole::class, 'role');
     // }
+
+    public function societies()
+    {
+        return $this->belongsToMany(Society::class);
+    }
     public function properties()
     {
         return $this->hasMany(Property::class);
@@ -94,10 +99,6 @@ class User extends Authenticatable
         return $this->hasMany(MaintenanceCharge::class);
     }
 
-    public function society()
-    {
-        return $this->belongsTo(Society::class);
-    }
 
     // public function userRole()
     // {
