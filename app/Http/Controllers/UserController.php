@@ -27,7 +27,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
             'phone' => 'required|',
-            'role' => 'required|string',
+            'role' => 'required',
             // Add any additional validation rules as per your requirements
         ]);
 
