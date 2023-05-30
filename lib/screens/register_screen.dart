@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:housing_society_management/models/user.dart';
-import 'package:housing_society_management/constants/user_roles.dart';
-import 'package:housing_society_management/screens/login_screen.dart';
-import 'package:housing_society_management/services/api/api_service.dart';
 import 'package:housing_society_management/services/user_service.dart';
 
 const List<String> list = <String>['Owner', 'Tenant'];

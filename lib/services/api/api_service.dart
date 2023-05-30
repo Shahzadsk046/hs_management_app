@@ -27,9 +27,11 @@ class ApiService {
   Future<dynamic> post(String endpoint, dynamic data) async {
     final response = await http.post(
       Uri.parse('$baseUrl/$endpoint'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(data),
+      // headers: {'Content-Type': 'application/json'},
+      body: data,
     );
+    print("I'm in API Service 32");
+    print(endpoint);
     print("I'm in API Service 32");
     print(endpoint);
     print("I'm in API Service 34");

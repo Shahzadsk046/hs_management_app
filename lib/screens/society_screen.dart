@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:housing_society_management/models/society.dart';
-import 'package:housing_society_management/models/user.dart';
 import 'package:housing_society_management/services/society_service.dart';
 
 // class SocietyScreen extends StatefulWidget {

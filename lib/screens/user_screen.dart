@@ -1,7 +1,7 @@
 import 'package:housing_society_management/models/user.dart';
 import 'package:housing_society_management/services/user_service.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
+// import 'package:uuid/uuid.dart';
 
 const List<String> list = <String>['Owner', 'Tenant'];
 
@@ -86,10 +86,14 @@ class _UserScreenState extends State<UserScreen> {
 
     try {
       final createdUser = await _userService.createUser(user);
+      print("89");
+      print(_users);
       setState(() {
         _users.add(createdUser);
         _isLoading = false;
       });
+      print("95");
+      print(_users);
       Navigator.of(context).pop(); // Close the create user modal
     } catch (error) {
       setState(() {
@@ -318,8 +322,7 @@ class _UserScreenState extends State<UserScreen> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       final newUser = User(
-                          id: int.parse(Uuid().v4().replaceAll('-', ''),
-                              radix: 16),
+                          id: 123,
                           name: _name,
                           email: _email,
                           password: _password,
@@ -566,6 +569,8 @@ class _AddUserScreenState extends State<AddUserScreen> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
   String finalRole = list.first;
+  List<User> _users = [];
+
   bool _isLoading = false;
 
   @override
@@ -653,8 +658,18 @@ class _AddUserScreenState extends State<AddUserScreen> {
                     ),
                   ),
                   SizedBox(height: 16.0),
-                  ElevatedButton(
-                    onPressed: _createUser,
+                  FloatingActionButton(
+                    onPressed: () {
+                      User newUser = User(
+                        id: 123,
+                        name: _nameController.text,
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                        phone: _phoneController.text,
+                        role: finalRole,
+                      );
+                      _createUser(newUser);
+                    },
                     child: Text('Save'),
                   ),
                 ],
@@ -663,7 +678,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
     );
   }
 
-  Future<void> _createUser() async {
+  Future<void> _createUser(User user) async {
     final name = _nameController.text;
     final email = _emailController.text;
     final password = _passwordController.text;
@@ -694,13 +709,13 @@ class _AddUserScreenState extends State<AddUserScreen> {
     });
 
     try {
-      final user = User(
-          id: int.parse(Uuid().v4().replaceAll('-', ''), radix: 16),
-          name: name,
-          email: email,
-          password: password,
-          phone: phone,
-          role: role);
+      // final user = User(
+      //     id: 12,
+      //     name: name,
+      //     email: email,
+      //     password: password,
+      //     phone: phone,
+      //     role: role);
       print(user.id);
       print(user.name);
       print(user.email);
@@ -710,9 +725,17 @@ class _AddUserScreenState extends State<AddUserScreen> {
       // final response = await _userService.createUser(user);
       print("697");
       // print(_userService.createUser(user));
-      await _userService.createUser(user);
+      dynamic data = await _userService.createUser(user);
       print("700");
       // print(_userService.createUser(user));
+      if (data != null) {
+        User newUser = User.fromJson(data);
+        setState(() {
+          _users.add(newUser);
+        });
+      } else {
+        print('Failed to create user: Invalid response');
+      }
 
       setState(() {
         _isLoading = false;

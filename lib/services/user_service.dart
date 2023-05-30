@@ -240,26 +240,68 @@ class UserService {
   }
 
   // Create a new user
-  Future<User> createUser(User user) async {
-    print("I am in service 192");
-    // final response = await _apiService.post('users', user.toJson());
+  // Future<User> createUser(User user) async {
+  //   print("I am in service 192");
+  //   // final response = await _apiService.post('users', user.toJson());
 
-    // final userJson = response['data'];
-    // final createdUser = User.fromJson(userJson);
-    // return createdUser;
-    print("I am in service 198");
-    print(json.encode(user.toJson()));
-    print("I am in service 200");
-    print(user.toJson());
-    final response = await _apiService.post('users', user.toJson());
-    print("I am in service 203");
-    print(response + "123123213");
-    if (response.statusCode == 200) {
-      final createdUser = User.fromJson(response.data['user']);
-      return createdUser;
-    } else {
-      print('Failed to create user in service');
-      throw Exception('Failed to create user in service');
+  //   // final userJson = response['data'];
+  //   // final createdUser = User.fromJson(userJson);
+  //   // return createdUser;
+  //   print("I am in service 198");
+  //   print(json.encode(user.toJson()));
+  //   print("I am in service 200");
+  //   print(user.toJson());
+  //   print(user);
+  //   final response =
+  //       await _apiService.post('users', json.encode(user.toJson()));
+  //   print("I am in service 203");
+  //   print(response + "123123213");
+  //   if (response.statusCode == 200) {
+  //     final createdUser = User.fromJson(response.data['user']);
+  //     return createdUser;
+  //   } else {
+  //     print('Failed to create user in service');
+  //     throw Exception('Failed to create user in service');
+  //   }
+  // }
+
+  Future<User> createUser(User user) async {
+    try {
+      print('270');
+      print(user);
+      final response = await http.post(
+        Uri.parse('$baseUrl/users'),
+        body: {
+          'name': user.name,
+          // 'username': user.username,
+          'email': user.email,
+          'password': user.password,
+          'phone': user.phone,
+          'role': user.role.toLowerCase(),
+        },
+      );
+
+      // body: jsonEncode(user.toJson()),
+      print('276');
+      print(response.headers);
+      print(response.body);
+      print(response.statusCode);
+
+      if (response.statusCode == 201) {
+        print('291');
+        // dynamic data = jsonDecode(response.body);
+        print('293');
+        // print(data);
+        print('295');
+        // print(User.fromJson(data as dynamic));
+        return User.fromJson(jsonDecode(response.body) as dynamic);
+      } else {
+        print('298');
+        throw Exception('Failed to create user');
+      }
+    } catch (e) {
+      print('302 : $e');
+      throw Exception('Error occurred: $e');
     }
   }
 
